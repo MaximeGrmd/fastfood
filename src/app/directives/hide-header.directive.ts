@@ -1,10 +1,44 @@
-import { Directive } from '@angular/core';
+import { AfterViewInit, Directive, HostListener, Input, Renderer2 } from '@angular/core';
+import { isPlatform, DomController } from '@ionic/angular';
 
 @Directive({
   selector: '[appHideHeader]'
 })
-export class HideHeaderDirective {
+export class HideHeaderDirective implements AfterViewInit {
 
-  constructor() { }
+  @Input('appHideHeader') header: any;
+
+  private headerHeight = isPlatform('ios') ? 44 : 56;
+  private children: any;
+
+  constructor(
+    private renderer: Renderer2,
+    private domController: DomController,
+  ) { }
+
+  @HostListener('ionScroll', ['$event']) onContentScroll($event: any) {
+    const scrollTop: number = $event.detail.scrollTop;
+    let newPosition = -scrollTop;
+
+    if (newPosition < -this.headerHeight) {
+      newPosition = -this.headerHeight;
+    }
+
+    const newOpacity = 1 - (newPosition / -this.headerHeight);
+
+    this.domController.write(() => {
+      this.renderer.setStyle(this.header, 'top', newPosition + 'px');
+      for(const child of this.children) {
+        this.renderer.setStyle(child, 'opacity', newOpacity);
+      }
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.header = this.header.el;
+    this.children = this.header.children;
+  }
+
+
 
 }
