@@ -6,7 +6,7 @@
 
   <ion-row class="info-row" #hideheader>
     <ion-col size="2" class="ion-padding-start">
-      <img src="./assets/delivery.png">
+      <img src="./assets/delivery.svg">
     </ion-col>
     <ion-col size="8">
       <ion-text color="dark">
@@ -39,13 +39,13 @@
 
   <ion-slides [options]="categoriesSlideOpts">
     <ion-slide *ngFor="let categorie of categories">
-      <img [src]="categorie.img">
+      <img [defaultImage]="defaultImage" [lazyLoad]="categorie.img">
     </ion-slide>
   </ion-slides>
 
   <ion-slides [options]="highlightsSlideOpts">
     <ion-slide *ngFor="let highlight of highlights">
-      <img [src]="highlight.img">
+      <img [defaultImage]="defaultImage" [lazyLoad]="highlight.img">
     </ion-slide>
   </ion-slides>
 
@@ -55,7 +55,7 @@
 
   <ion-slides [options]="featuredSlideOpts">
     <ion-slide *ngFor="let f of featured" class="featured-slide" routerLink="/details">
-      <img [src]="f.img">
+      <img [defaultImage]="defaultImage" [lazyLoad]="f.img">
 
       <div class="info">
         <ion-text color="dark"><b>{{ f.name }}</b></ion-text>

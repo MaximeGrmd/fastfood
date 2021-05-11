@@ -34,11 +34,12 @@ export class HomePage implements OnInit {
 
   showLocationDetail = false;
 
+  defaultImage = './assets/loading.svg';
+
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.http.get('https://devdactic.fra1.digitaloceanspaces.com/foodui/home.json').subscribe( (res: any) => {
-      console.log(res);
 
       this.categories = res.categories;
       this.highlights = res.highlights;

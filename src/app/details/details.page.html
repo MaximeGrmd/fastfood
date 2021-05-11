@@ -18,7 +18,8 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" scrollEvents="true" [appParallax]="img" (ionScroll)="onScroll($event)">
-  <div #img class="header-image" [style.background-image]="'url(' + data?.img + ')'"></div>
+  <!-- <div #img class="header-image" [style.background-image]="'url(' + data?.img + ')'"></div> -->
+  <div #img class="header-image" [lazyLoad]="data?.img"></div>
 
   <ion-header collapse="condense" class="ion-no-border">
     <ion-toolbar color="light">
@@ -97,7 +98,8 @@
         <ion-text color="dark"><b>{{ meal.price | currency:'EUR' }}</b></ion-text>
       </ion-col>
       <ion-col size="4" class="border-bottom">
-        <div class="meal-image" [style.background-image]="'url(' + meal.img + ')'"></div>
+        <div class="meal-image" [lazyLoad]="meal.img"></div>
+        <!-- <div class="meal-image" [style.background-image]="'url(' + meal.img + ')'"></div> -->
       </ion-col>
     </ion-row>
   </ion-list>
