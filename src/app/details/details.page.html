@@ -17,7 +17,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" scrollEvents="true" [appParallax]="img">
+<ion-content [fullscreen]="true" scrollEvents="true" [appParallax]="img" (ionScroll)="onScroll($event)">
   <div #img class="header-image" [style.background-image]="'url(' + data?.img + ')'"></div>
 
   <ion-header collapse="condense" class="ion-no-border">
@@ -72,6 +72,16 @@
 
   <div *ngIf="data" class="ion-padding">
     Please do not call {{ data.name }} for any amends to your order, as these cannot be made once your order is received.
+  </div>
+
+  <div slot="fixed">
+    <ion-slides *ngIf="data" [options]="opts" [ngClass]="{'slides-visible': categorySlidesVisible, 'slides-hidden': !categorySlidesVisible}">
+      <ion-slide *ngFor="let entry of data.food; let i = index;">
+        <ion-button [class.active-category]="activeCategory === i" fill="clear" (click)="selectCategory(i)">
+          {{ entry.category }}
+        </ion-button>
+      </ion-slide>
+    </ion-slides>
   </div>
 
   <ion-list *ngFor="let entry of data?.food">
