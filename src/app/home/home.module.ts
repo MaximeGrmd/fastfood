@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { SharedDirectivesModule } from '../directives/shared-directives.module';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SharedDirectivesModule } from '../directives/shared-directives.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    SharedDirectivesModule
+    SharedDirectivesModule,
+    LazyLoadImageModule
   ],
   declarations: [HomePage]
 })
